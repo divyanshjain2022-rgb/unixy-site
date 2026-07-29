@@ -5,6 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>unixy — the AI class assistant that lives in Telegram</title>
 <meta name="description" content="unixy turns lecture recordings into syllabus-tagged notes, answers questions with citation-strict AI, and tracks every deadline — entirely inside Telegram. Built for law classrooms in India.">
+<link rel="canonical" href="https://unixy.in/">
+<meta name="theme-color" content="#faf7f0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14120b" media="(prefers-color-scheme: dark)">
+
+<!-- link previews (Telegram, WhatsApp, X, LinkedIn, mail clients) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="unixy">
+<meta property="og:url" content="https://unixy.in/">
+<meta property="og:title" content="unixy — the AI class assistant that lives in Telegram">
+<meta property="og:description" content="Lecture recordings in, syllabus-tagged notes out. Citation-strict answers, deadlines that chase you — entirely inside Telegram. Built for law classrooms in India.">
+<meta property="og:image" content="https://unixy.in/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="unixy — every lecture, remembered. Every claim, cited.">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="unixy — the AI class assistant that lives in Telegram">
+<meta name="twitter:description" content="Lecture recordings in, syllabus-tagged notes out. Citation-strict answers, deadlines that chase you — entirely inside Telegram.">
+<meta name="twitter:image" content="https://unixy.in/og.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314120b'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' font-weight='700' fill='%23d9b45c' text-anchor='middle'%3Eu%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -30,7 +52,8 @@
     line-height: 1.6;
     font-size: 16.5px;
   }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  /* inline-only so `section`'s vertical padding still applies to `section.wrap` */
+  .wrap { max-width: 1060px; margin: 0 auto; padding-inline: 24px; }
 
   /* ---------- header ---------- */
   header {
@@ -62,7 +85,7 @@
   .btn.gold { background: var(--gold); }
 
   /* ---------- hero ---------- */
-  .hero { padding: 96px 0 72px; text-align: center; position: relative; overflow: hidden; }
+  .hero { padding-block: 96px 72px; text-align: center; position: relative; overflow: hidden; }
   .hero::before {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background:
@@ -116,6 +139,8 @@
 
   /* ---------- sections ---------- */
   section { padding: 88px 0; }
+  /* keep anchored headings clear of the sticky header */
+  section[id] { scroll-margin-top: 80px; }
   .section-head { max-width: 640px; margin-bottom: 52px; }
   .kicker {
     font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
@@ -159,7 +184,7 @@
   }
   .card h3 { font-family: var(--serif); font-size: 1.18rem; font-weight: 600; margin-bottom: 8px; }
   .card p { font-size: .92rem; color: var(--ink-soft); }
-  .card code {
+  .card code, .layer code {
     background: var(--paper-warm); border: 1px solid var(--line); border-radius: 6px;
     padding: 1px 7px; font-size: .84em; color: var(--green); font-weight: 600;
   }
@@ -181,10 +206,41 @@
   .gpoint p { font-size: .95rem; color: var(--ink-soft); }
   .gpoint p b { color: var(--ink); }
 
+  /* stack */
+  .stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .layer {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px 26px;
+  }
+  .layer h3 {
+    font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .layer .tag {
+    font-family: var(--sans); font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gold); background: rgba(184,134,11,.09);
+    border: 1px solid rgba(184,134,11,.25); border-radius: 999px; padding: 3px 10px;
+  }
+  .layer .tag.muted { color: var(--ink-soft); background: var(--paper-warm); border-color: var(--line); }
+  .layer ul { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+  .layer li { font-size: .9rem; color: var(--ink-soft); padding-left: 16px; position: relative; }
+  .layer li::before {
+    content: "·"; position: absolute; left: 4px; color: var(--gold); font-weight: 700;
+  }
+  .layer li b { color: var(--ink); font-weight: 600; }
+  .stack-note {
+    margin-top: 24px; padding: 20px 24px; border-radius: 14px;
+    background: var(--paper-warm); border: 1px solid var(--line);
+    font-size: .93rem; color: var(--ink-soft);
+  }
+  .stack-note b { color: var(--ink); }
+
   /* stats strip */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
   .stat .n { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--gold); line-height: 1.1; }
   .stat .l { font-size: .88rem; color: var(--ink-soft); margin-top: 6px; }
+  .stats-head { text-align: center; margin-bottom: 40px; }
+  .stats-head .kicker { margin-bottom: 8px; }
+  .stats-head p { font-size: .95rem; color: var(--ink-soft); max-width: 560px; margin: 0 auto; }
 
   /* cta */
   .cta { text-align: center; }
@@ -218,7 +274,7 @@
     .stats { grid-template-columns: 1fr 1fr; row-gap: 36px; }
   }
   @media (max-width: 560px) {
-    .steps, .grid { grid-template-columns: 1fr; }
+    .steps, .grid, .stack-grid { grid-template-columns: 1fr; }
     .step, .step:first-child, .step:last-child, .step:nth-child(2), .step:nth-child(3) { border-radius: 12px; }
     .nav-links a:not(.btn) { display: none; }
   }
@@ -233,6 +289,7 @@
       <a href="#how">How it works</a>
       <a href="#features">Features</a>
       <a href="#guardrail">Trust</a>
+      <a href="#stack">Stack</a>
       <a class="btn" href="#contact">Get in touch</a>
     </nav>
   </div>
@@ -240,7 +297,7 @@
 
 <main>
   <section class="hero wrap">
-    <div class="eyebrow">⚖️ &nbsp;Built for law classrooms · India</div>
+    <div class="eyebrow"><span aria-hidden="true">⚖️</span> &nbsp;Built for law classrooms · India</div>
     <h1>Every lecture, remembered.<br>Every claim, <em>cited.</em></h1>
     <p class="lede">
       unixy is an AI class assistant that lives entirely inside Telegram. It turns raw lecture
@@ -309,32 +366,32 @@
     </div>
     <div class="grid">
       <div class="card">
-        <div class="icon">📝</div>
+        <div class="icon" aria-hidden="true">📝</div>
         <h3>Syllabus-tagged notes</h3>
         <p>Every note is mapped to your course's actual syllabus units, with the professor's emphasised points called out — not generic AI summaries.</p>
       </div>
       <div class="card">
-        <div class="icon">🔍</div>
+        <div class="icon" aria-hidden="true">🔍</div>
         <h3>Citation-strict Q&amp;A</h3>
         <p>Ask <code>/ask</code> anything. Answers cite the exact lecture or reading they came from — and unixy refuses to answer when the material doesn't cover it.</p>
       </div>
       <div class="card">
-        <div class="icon">📅</div>
+        <div class="icon" aria-hidden="true">📅</div>
         <h3>Deadlines that chase you</h3>
         <p>Assignments, moots, and internals live on a pinned board in IST with automatic 3-day and 1-day reminders. No calendar app required.</p>
       </div>
       <div class="card">
-        <div class="icon">📂</div>
+        <div class="icon" aria-hidden="true">📂</div>
         <h3>Instant file recall</h3>
         <p>"<code>/files unit 3</code>" fetches every lecture, slide deck, and reading for that unit — months later, in seconds.</p>
       </div>
       <div class="card">
-        <div class="icon">🤖</div>
+        <div class="icon" aria-hidden="true">🤖</div>
         <h3>An agent you can @mention</h3>
         <p>The unixy Concierge answers questions, compiles exam-prep outlines, delivers files, and drafts class updates — conversationally.</p>
       </div>
       <div class="card">
-        <div class="icon">🛠️</div>
+        <div class="icon" aria-hidden="true">🛠️</div>
         <h3>Self-correcting notes</h3>
         <p>Spotted an error? Reply <code>/report</code>. AI drafts the fix, a class admin approves it, and the note is corrected in place for everyone.</p>
       </div>
@@ -350,22 +407,70 @@
       </blockquote>
       <div class="guardrail-points">
         <div class="gpoint">
-          <div class="tick">✓</div>
+          <div class="tick" aria-hidden="true">✓</div>
           <p><b>Grounded by construction.</b> The AI can only cite sources it was handed — every answer carries its receipts.</p>
         </div>
         <div class="gpoint">
-          <div class="tick">✓</div>
+          <div class="tick" aria-hidden="true">✓</div>
           <p><b>Refusal over guesswork.</b> Thin evidence produces "I couldn't find this in the class notes" — never confident fiction.</p>
         </div>
         <div class="gpoint">
-          <div class="tick">✓</div>
+          <div class="tick" aria-hidden="true">✓</div>
           <p><b>Humans hold the pen.</b> Anything students see — a deadline, a correction, an announcement — is proposed by AI and approved by a class admin first.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="wrap" id="stack">
+    <div class="section-head">
+      <div class="kicker">Built on AWS</div>
+      <h2>Every model that touches a student's notes runs on Amazon Bedrock.</h2>
+      <p>Law-grade output needs frontier models, not the cheapest ones. Bedrock lets us put the strongest available model on each job — and keep every lecture inside one governed account.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="layer">
+        <h3>Note generation <span class="tag">Amazon Bedrock</span></h3>
+        <ul>
+          <li><b>Claude Opus</b> — drafts the structured, syllabus-tagged note from a full lecture transcript, preserving what the professor emphasised.</li>
+          <li>Long-context reasoning is the difference between a summary and a note a student can revise from.</li>
+        </ul>
+      </div>
+      <div class="layer">
+        <h3>Q&amp;A, vision &amp; the agent <span class="tag">Amazon Bedrock</span></h3>
+        <ul>
+          <li><b>Claude Sonnet</b> — powers <code>/ask</code>, reads slide decks and scanned handouts, and runs the Concierge's tool-use loop.</li>
+          <li>Tool use is what lets the agent fetch files and draft updates instead of just talking about them.</li>
+        </ul>
+      </div>
+      <div class="layer">
+        <h3>Retrieval <span class="tag">Amazon Bedrock</span></h3>
+        <ul>
+          <li><b>Cohere Embed Multilingual v3</b> — 1024-dimension embeddings that hold up across English and Hinglish lecture transcripts.</li>
+          <li><b>Cohere Rerank 3.5</b> — the precision step that makes "cite or refuse" workable rather than aspirational.</li>
+        </ul>
+      </div>
+      <div class="layer">
+        <h3>Around the models <span class="tag muted">Supporting</span></h3>
+        <ul>
+          <li><b>AssemblyAI</b> for transcription, tuned with per-course legal keyterms.</li>
+          <li><b>Postgres + pgvector</b> for the corpus and vector index; Redis-compatible queues for the ingestion pipeline.</li>
+          <li>Python, containerised, deployed from CI — currently on a single small Linux host.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="stack-note">
+      <b>What credits change:</b> compute is the cheap part — inference is the bill. AWS credits go
+      directly into running Opus-class models on every lecture instead of rationing them, and into
+      consolidating the pipeline, database and queues onto AWS alongside the models they already serve.
+    </p>
+  </section>
+
   <section class="wrap">
+    <div class="stats-head">
+      <div class="kicker">Design goals</div>
+      <p>The targets the system is built and measured against — not audited results. unixy is in its first cohort.</p>
+    </div>
     <div class="stats">
       <div class="stat"><div class="n">90+</div><div class="l">students in the pilot cohort</div></div>
       <div class="stat"><div class="n">0</div><div class="l">new apps students must install</div></div>
@@ -378,14 +483,14 @@
     <div class="cta-box">
       <h2>Bring unixy to your classroom.</h2>
       <p>We're piloting with a law cohort in India and expanding to more courses and campuses. If your class runs on a group chat, unixy can run your class.</p>
-      <a class="btn gold" href="mailto:sudeepjain2011.2011@gmail.com?subject=unixy%20for%20our%20class">Write to us</a>
+      <a class="btn gold" href="mailto:dev@unixy.in?subject=unixy%20for%20our%20class">Write to us</a>
     </div>
   </section>
 </main>
 
 <footer class="wrap">
   <div>© 2026 unixy · Made in India 🇮🇳</div>
-  <div><a href="mailto:sudeepjain2011.2011@gmail.com">sudeepjain2011.2011@gmail.com</a></div>
+  <div><a href="mailto:dev@unixy.in">dev@unixy.in</a></div>
 </footer>
 
 </body>
